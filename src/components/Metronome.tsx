@@ -301,53 +301,55 @@ const Metronome = () => {
             </div>
           </div>
 
-          <div className="space-y-4 bg-white px-2 py-3 sm:p-4 rounded-none sm:rounded-lg shadow-sm">
-            <h3 className="font-medium text-gray-700">Accent Beat Sound</h3>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <label className="text-sm text-gray-600">Frequency</label>
-                <span className="text-sm text-gray-500 w-16 text-right">
-                  {soundSettings.accent.frequency} Hz
-                </span>
+          {accentFirstBeat && (
+            <div className="space-y-4 bg-white px-2 py-3 sm:p-4 rounded-none sm:rounded-lg shadow-sm">
+              <h3 className="font-medium text-gray-700">Accent Beat Sound</h3>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <label className="text-sm text-gray-600">Frequency</label>
+                  <span className="text-sm text-gray-500 w-16 text-right">
+                    {soundSettings.accent.frequency} Hz
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="200"
+                  max="2000"
+                  value={soundSettings.accent.frequency}
+                  onChange={(e) =>
+                    updateSoundSettings(
+                      "accent",
+                      "frequency",
+                      parseInt(e.target.value)
+                    )
+                  }
+                  className="w-full accent-blue-500"
+                />
               </div>
-              <input
-                type="range"
-                min="200"
-                max="2000"
-                value={soundSettings.accent.frequency}
-                onChange={(e) =>
-                  updateSoundSettings(
-                    "accent",
-                    "frequency",
-                    parseInt(e.target.value)
-                  )
-                }
-                className="w-full accent-blue-500"
-              />
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <label className="text-sm text-gray-600">Volume</label>
-                <span className="text-sm text-gray-500 w-16 text-right">
-                  {Math.round(soundSettings.accent.gain * 100)}%
-                </span>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <label className="text-sm text-gray-600">Volume</label>
+                  <span className="text-sm text-gray-500 w-16 text-right">
+                    {Math.round(soundSettings.accent.gain * 100)}%
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={soundSettings.accent.gain * 100}
+                  onChange={(e) =>
+                    updateSoundSettings(
+                      "accent",
+                      "gain",
+                      parseInt(e.target.value) / 100
+                    )
+                  }
+                  className="w-full accent-blue-500"
+                />
               </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={soundSettings.accent.gain * 100}
-                onChange={(e) =>
-                  updateSoundSettings(
-                    "accent",
-                    "gain",
-                    parseInt(e.target.value) / 100
-                  )
-                }
-                className="w-full accent-blue-500"
-              />
             </div>
-          </div>
+          )}
         </div>
 
         <button
